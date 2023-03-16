@@ -1,91 +1,43 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+"use client";
+import { useMemo, useState } from "react";
+import transformerToLogicalTailwindCss from "@/transformer";
+import useDebounce from "@/hooks/useDebounce";
+import useRenderDiff from "@/hooks/useRenderDiff";
 
 export default function Home() {
+  const [input, setInput] = useState("");
+  const debouncedInput = useDebounce(input, 500);
+  const output = useMemo(
+    () => transformerToLogicalTailwindCss(debouncedInput),
+    [debouncedInput]
+  );
+  const { renderDiff } = useRenderDiff({ oldString: input, newString: output });
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <>
+      <main className="grid grid-rows-[auto,1fr] min-bs-[100dvh] ">
+        <div className="bg-blue-600 shadow-lg md:flex md:items-center md:justify-between">
+          <div className="flex-1 min-is-0 plb-4 pli-2">
+            <h2 className="text-2xl font-bold leading-7 text-blue-50 sm:truncate sm:text-3xl sm:tracking-tight">
+              To Logical Tailwind CSS
+            </h2>
+          </div>
+        </div>
+
+        <div className="grid grid-rows-[auto,1fr] text-lg md:grid-cols-[400px,1fr] md:grid-rows-1">
+          <div className="">
+            <textarea
+              className="block resize-none border-0 bg-slate-900 p-4 text-white/90  caret-pink-500 shadow-sm ring-1 ring-inset ring-gray-300 bs-full is-full placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6 sm:plb-1.5"
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
             />
-          </a>
+          </div>
+
+          <div className="block resize-none overflow-scroll border-0 bg-slate-50 p-4 text-black caret-pink-500 shadow-lg ring-1 ring-inset ring-gray-300 bs-full is-full placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6 sm:plb-1.5">
+            <pre>{renderDiff()}</pre>
+          </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+      </main>
+    </>
+  );
 }

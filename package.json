@@ -12,6 +12,7 @@
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.11",
+    "diff": "^5.1.0",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "next": "13.2.4",
@@ -20,6 +21,7 @@
     "typescript": "4.9.5"
   },
   "devDependencies": {
+    "@types/diff": "^5.0.2",
     "autoprefixer": "^10.4.14",
     "eslint-config-prettier": "^8.7.0",
     "eslint-plugin-tailwindcss": "^3.10.1",
