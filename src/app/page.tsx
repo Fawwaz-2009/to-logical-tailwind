@@ -1,16 +1,24 @@
 "use client";
 import { useMemo, useState } from "react";
-import transformerToLogicalTailwindCss from "@/transformer";
+import transformerToPluginLogicalTailwindCss from "@/transformer/transformerToPluginLogicalTailwindCss";
+import transformerToNativeLogicalTailwindCss from "@/transformer/transformerToNativeLogicalTailwindCss";
 import useDebounce from "@/hooks/useDebounce";
 import useRenderDiff from "@/hooks/useRenderDiff";
 import CopyButton from "@/components/CopyButton";
+import Select from "@/components/Select";
 
 export default function Home() {
   const [input, setInput] = useState("");
+  const [outputFormat, setOutputFormat] = useState<
+    "LOGICAL_PLUGIN" | "NATIVE_TAILWIND"
+  >("LOGICAL_PLUGIN");
   const debouncedInput = useDebounce(input, 500);
   const output = useMemo(
-    () => transformerToLogicalTailwindCss(debouncedInput),
-    [debouncedInput]
+    () =>
+      outputFormat === "LOGICAL_PLUGIN"
+        ? transformerToPluginLogicalTailwindCss(debouncedInput)
+        : transformerToNativeLogicalTailwindCss(debouncedInput),
+    [debouncedInput, outputFormat]
   );
   const { renderDiff } = useRenderDiff({ oldString: input, newString: output });
 
@@ -18,10 +26,32 @@ export default function Home() {
     <>
       <main className="grid grid-rows-[auto,1fr] min-bs-[100dvh] ">
         <div className="bg-blue-600 shadow-lg md:flex md:items-center md:justify-between">
-          <div className="flex-1 min-is-0 plb-4 pli-2">
+          <div className="flex flex-1 justify-between min-is-0 plb-4 pli-2">
             <h2 className="text-2xl font-bold leading-7 text-blue-50 sm:truncate sm:text-3xl sm:tracking-tight">
               To Logical Tailwind CSS
             </h2>
+            <Select
+              label="Output Format"
+              name="outputFormat"
+              value={outputFormat}
+              onChange={(event) =>
+                setOutputFormat(
+                  event.target.value as "LOGICAL_PLUGIN" | "NATIVE_TAILWIND"
+                )
+              }
+              options={[
+                {
+                  id: "1",
+                  value: "LOGICAL_PLUGIN",
+                  label: "tailwindcss-logical",
+                },
+                {
+                  id: "2",
+                  value: "NATIVE_TAILWIND",
+                  label: "Native Tailwind (v3.3 +)",
+                },
+              ]}
+            />
           </div>
         </div>
 

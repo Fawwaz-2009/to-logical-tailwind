@@ -125,7 +125,7 @@ const transformations = [
   ...border,
   ...borderRadius,
 ];
-export default function transformerToLogicalTailwindCss(input: string) {
+export default function transformerToPluginLogicalTailwindCss(input: string) {
   return transformations.reduce(
     (acc, { originalTailwind: originalTailwind, logicalTailwind }) =>
       acc.replaceAll(originalTailwind, logicalTailwind),
