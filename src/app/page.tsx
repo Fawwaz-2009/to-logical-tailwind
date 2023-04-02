@@ -26,32 +26,42 @@ export default function Home() {
     <>
       <main className="grid grid-rows-[auto,1fr] min-bs-[100dvh] ">
         <div className="bg-blue-600 shadow-lg md:flex md:items-center md:justify-between">
-          <div className="flex flex-1 justify-between min-is-0 plb-4 pli-2">
+          <div className="flex-1 justify-between min-is-0 plb-4 pli-2 sm:flex ">
             <h2 className="text-2xl font-bold leading-7 text-blue-50 sm:truncate sm:text-3xl sm:tracking-tight">
               To Logical Tailwind CSS
             </h2>
-            <Select
-              label="Output Format"
-              name="outputFormat"
-              value={outputFormat}
-              onChange={(event) =>
-                setOutputFormat(
-                  event.target.value as "LOGICAL_PLUGIN" | "NATIVE_TAILWIND"
-                )
-              }
-              options={[
-                {
-                  id: "1",
-                  value: "LOGICAL_PLUGIN",
-                  label: "tailwindcss-logical",
-                },
-                {
-                  id: "2",
-                  value: "NATIVE_TAILWIND",
-                  label: "Native Tailwind (v3.3 +)",
-                },
-              ]}
-            />
+            <div className="flex items-end gap-8 mie-4 mbs-8 sm:mbs-0">
+              <Select
+                label="Output Format"
+                name="outputFormat"
+                value={outputFormat}
+                onChange={(event) =>
+                  setOutputFormat(
+                    event.target.value as "LOGICAL_PLUGIN" | "NATIVE_TAILWIND"
+                  )
+                }
+                options={[
+                  {
+                    id: "1",
+                    value: "LOGICAL_PLUGIN",
+                    label: "tailwindcss-logical",
+                  },
+                  {
+                    id: "2",
+                    value: "NATIVE_TAILWIND",
+                    label: "Native Tailwind (v3.3 +)",
+                  },
+                ]}
+              />
+              <a
+                href="https://github.com/Fawwaz-2009/to-logical-tailwind"
+                className="inline-flex items-center font-medium text-white hover:underline"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                See in Github
+              </a>
+            </div>
           </div>
         </div>
 
