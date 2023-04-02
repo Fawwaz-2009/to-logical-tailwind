@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import transformerToLogicalTailwindCss from "@/transformer";
 import useDebounce from "@/hooks/useDebounce";
 import useRenderDiff from "@/hooks/useRenderDiff";
+import CopyButton from "@/components/CopyButton";
 
 export default function Home() {
   const [input, setInput] = useState("");
@@ -24,7 +25,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="grid grid-rows-[auto,1fr] text-lg md:grid-cols-[400px,1fr] md:grid-rows-1">
+        <div className="grid grid-rows-[auto,1fr] text-lg md:grid-cols-[600px,1fr] md:grid-rows-1">
           <div className="">
             <textarea
               className="block resize-none border-0 bg-slate-900 p-4 text-white/90  caret-pink-500 shadow-sm ring-1 ring-inset ring-gray-300 bs-full is-full placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6 sm:plb-1.5"
@@ -33,7 +34,10 @@ export default function Home() {
             />
           </div>
 
-          <div className="block resize-none overflow-scroll border-0 bg-slate-50 p-4 text-black caret-pink-500 shadow-lg ring-1 ring-inset ring-gray-300 bs-full is-full placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6 sm:plb-1.5">
+          <div className="relative block resize-none overflow-scroll border-0 bg-slate-50 p-4 text-black caret-pink-500 shadow-lg ring-1 ring-inset ring-gray-300 bs-full is-full placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6 sm:plb-1.5">
+            <div className="absolute right-6 top-6">
+              <CopyButton text={output} />
+            </div>
             <pre>{renderDiff()}</pre>
           </div>
         </div>
