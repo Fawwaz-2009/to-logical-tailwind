@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import Demo from "@/components/demo";
 import { Separator } from "@/components/ui/separator";
+import { WhatIsLogicalTailwind } from "@/components/WhatIsLogicalTailwind";
 export default function Home() {
   const [input, setInput] = useState("");
   const [outputFormat, setOutputFormat] = useState<
@@ -36,22 +37,25 @@ export default function Home() {
   return (
     <>
       <div className="">
-        <header className="container mx-auto flex items-center justify-between">
+        <header className="container mx-auto mb-6 flex flex-col items-center justify-between sm:flex-row">
           <h2 className="my-8 text-center text-2xl font-bold leading-7  sm:truncate sm:text-3xl sm:tracking-tight">
             To Logical Tailwind CSS
           </h2>
 
-          <Button asChild variant={"outline"}>
-            <a
-              href="https://github.com/Fawwaz-2009/to-logical-tailwind"
-              // className="inline-flex items-center font-medium hover:underline"
-              target={"_blank"}
-              rel="noreferrer"
-            >
-              <GitHubLogoIcon className="mr-2 h-6 w-6" />
-              See in Github
-            </a>
-          </Button>
+          <div className=" flex items-center gap-2">
+            <WhatIsLogicalTailwind />
+            <Button asChild variant={"outline"}>
+              <a
+                href="https://github.com/Fawwaz-2009/to-logical-tailwind"
+                // className="inline-flex items-center font-medium hover:underline"
+                target={"_blank"}
+                rel="noreferrer"
+              >
+                <GitHubLogoIcon className="mr-2 h-6 w-6" />
+                See in Github
+              </a>
+            </Button>
+          </div>
         </header>
         <div className="mx-auto max-w-lg">
           <p className="">
