@@ -120,7 +120,7 @@ export default function Home() {
           <div className="grid h-[40rem] grid-rows-[auto,1fr] text-lg md:grid-cols-[600px,1fr] md:grid-rows-1">
             <div className="">
               <Textarea
-                className="block resize-none border-0 bg-slate-900 p-4 text-white/90 caret-pink-500 shadow-sm ring-1 ring-inset ring-gray-300 bs-full is-full placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6 "
+                className="block resize-none border-0 bg-slate-900 p-4 text-white/90 caret-pink-500 shadow-sm ring-1 ring-inset ring-gray-300 bs-48 is-full placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6 md:bs-full  "
                 value={input}
                 placeholder="Paste Your Tailwind CSS Markup to be converted to logical tailwindcss"
                 onChange={(event) => setInput(event.target.value)}
