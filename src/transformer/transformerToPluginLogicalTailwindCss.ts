@@ -42,7 +42,7 @@ const overscroll = [
   },
 ];
 const height = [
-  { originalTailwind: /\bh-"/g, logicalTailwind: "bs-" },
+  { originalTailwind: /\bh-/g, logicalTailwind: "bs-" },
   { originalTailwind: /\bmin-h-/g, logicalTailwind: "min-bs-" },
   { originalTailwind: /\bmax-h-/g, logicalTailwind: "max-bs-" },
 ];
