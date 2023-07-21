@@ -5,8 +5,18 @@ import transformerToNativeLogicalTailwindCss from "@/transformer/transformerToNa
 import useDebounce from "@/hooks/useDebounce";
 import useRenderDiff from "@/hooks/useRenderDiff";
 import CopyButton from "@/components/CopyButton";
-import Select from "@/components/Select";
-
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 export default function Home() {
   const [input, setInput] = useState("");
   const [outputFormat, setOutputFormat] = useState<
@@ -25,51 +35,55 @@ export default function Home() {
   return (
     <>
       <main className="grid grid-rows-[auto,1fr] min-bs-[100dvh] ">
-        <div className="bg-blue-600 shadow-lg md:flex md:items-center md:justify-between">
-          <div className="flex-1 justify-between min-is-0 plb-4 pli-2 sm:flex ">
-            <h2 className="text-2xl font-bold leading-7 text-blue-50 sm:truncate sm:text-3xl sm:tracking-tight">
+        <div className="shadow-lg md:flex md:items-center md:justify-between">
+          <div className="flex-1 flex-wrap justify-between min-is-0 plb-4 pli-2 sm:flex ">
+            <h2 className="text-2xl font-bold leading-7  sm:truncate sm:text-3xl sm:tracking-tight">
               To Logical Tailwind CSS
             </h2>
-            <div className="flex items-end gap-8 mie-4 mbs-8 sm:mbs-0">
-              <Select
-                label="Output Format"
-                name="outputFormat"
-                value={outputFormat}
-                onChange={(event) =>
-                  setOutputFormat(
-                    event.target.value as "LOGICAL_PLUGIN" | "NATIVE_TAILWIND"
-                  )
-                }
-                options={[
-                  {
-                    id: "1",
-                    value: "LOGICAL_PLUGIN",
-                    label: "tailwindcss-logical",
-                  },
-                  {
-                    id: "2",
-                    value: "NATIVE_TAILWIND",
-                    label: "Native Tailwind (v3.3 +)",
-                  },
-                ]}
-              />
-              <a
-                href="https://github.com/Fawwaz-2009/to-logical-tailwind"
-                className="inline-flex items-center font-medium text-white hover:underline"
-                target={"_blank"}
-                rel="noreferrer"
-              >
-                See in Github
-              </a>
+            <div className="flex items-center gap-8 mie-4 mbs-8 sm:mbs-0">
+              <div className="flex items-center gap-2">
+                <Label className="hidden lg:inline">Output Format</Label>
+                <Select
+                  name="outputFormat"
+                  value={outputFormat}
+                  onValueChange={(val) =>
+                    setOutputFormat(val as "LOGICAL_PLUGIN" | "NATIVE_TAILWIND")
+                  }
+                >
+                  <SelectTrigger className="w-52">
+                    <SelectValue />
+                    <SelectContent>
+                      <SelectItem value="LOGICAL_PLUGIN">
+                        tailwindcss-logical
+                      </SelectItem>
+                      <SelectItem value="NATIVE_TAILWIND">
+                        Native Tailwind (v3.3 +)
+                      </SelectItem>
+                    </SelectContent>
+                  </SelectTrigger>
+                </Select>
+              </div>
+
+              <Button asChild variant={"ghost"}>
+                <a
+                  href="https://github.com/Fawwaz-2009/to-logical-tailwind"
+                  // className="inline-flex items-center font-medium hover:underline"
+                  target={"_blank"}
+                  rel="noreferrer"
+                >
+                  See in Github
+                </a>
+              </Button>
             </div>
           </div>
         </div>
 
         <div className="grid grid-rows-[auto,1fr] text-lg md:grid-cols-[600px,1fr] md:grid-rows-1">
           <div className="">
-            <textarea
-              className="block resize-none border-0 bg-slate-900 p-4 text-white/90  caret-pink-500 shadow-sm ring-1 ring-inset ring-gray-300 bs-full is-full placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6 sm:plb-1.5"
+            <Textarea
+              className="block resize-none border-0 bg-slate-900 p-4 text-white/90 caret-pink-500 shadow-sm ring-1 ring-inset ring-gray-300 bs-full is-full placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-lg sm:leading-6 sm:plb-1.5"
               value={input}
+              placeholder="Paste Your Tailwind CSS Markup to be converted to logical tailwindcss"
               onChange={(event) => setInput(event.target.value)}
             />
           </div>
