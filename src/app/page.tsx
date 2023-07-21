@@ -16,6 +16,8 @@ import {
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import Demo from "@/components/demo";
+import { Separator } from "@/components/ui/separator";
 export default function Home() {
   const [input, setInput] = useState("");
   const [outputFormat, setOutputFormat] = useState<
@@ -58,7 +60,7 @@ export default function Home() {
             <Button
               asChild
               variant={"link"}
-              className="h-auto p-0 text-blue-600"
+              className="h-auto p-0 text-base text-blue-600"
             >
               <a
                 href="https://github.com/stevecochrane/tailwindcss-logical"
@@ -71,7 +73,7 @@ export default function Home() {
             <Button
               asChild
               variant={"link"}
-              className="h-auto p-0 text-blue-600"
+              className="h-auto p-0 text-base text-blue-600"
             >
               <a
                 href="https://tailwindcss.com/blog/tailwindcss-v3-3"
@@ -130,6 +132,8 @@ export default function Home() {
           </div>
         </main>
       </div>
+      <Separator className="container my-14 mx-auto" />
+      <Demo />
     </>
   );
 }
